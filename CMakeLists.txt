@@ -57,11 +57,17 @@ endif()
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
-     Classes/HelloWorldScene.cpp
+     Classes/SplashScene.cpp
+     Classes/MainMenuScene.cpp
+     Classes/GameScene.cpp
+     ${PLATFORM_SPECIFIC_SRC}
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
-     Classes/HelloWorldScene.h
+     Classes/SplashScene.h
+     Classes/MainMenuScene.h
+     Classes/GameScene.h
+     ${PLATFORM_SPECIFIC_SRC}
      )
 
 if(ANDROID)
