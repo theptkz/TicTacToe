@@ -44,7 +44,7 @@ bool GameScene::init()
     auto touchListener2 = EventListenerKeyboard::create();
     touchListener2->onKeyReleased = CC_CALLBACK_2(GameScene::keyReleased, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener2, this);
-
+    ui = new UI( this );
     return true;
 }
 
@@ -293,17 +293,15 @@ void GameScene::reset(int player, bool check)
             label = Label::createWithTTF("X WIN!", "fonts/Roboto.ttf", 50);
         }
     }
-    label->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2));
+    label->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2+100));
+    ui->ShowGameOver( this );
     this->addChild(label);
-
-    this->scheduleOnce(static_cast<cocos2d::SEL_SCHEDULE>(&GameScene::removeAll), 2.7);
 }
 
 void GameScene::removeAll(float dt)
 {
     this->removeAllChildren();
     LuaLog("Reset");
-    initial();
 }
 
 void GameScene::keyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event)

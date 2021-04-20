@@ -49,13 +49,23 @@ bool MainMenuScene::init()
     this->addChild(title);
 
     Button *playButton = Button::create(MAIN_MENU_PLAY_BUTTON, MAIN_MENU_PLAY_BUTTON_PRESSED);
-    playButton->setScaleX(0.205);
-    playButton->setScaleY(0.147);
+    playButton->setScaleX(0.1);
+    playButton->setScaleY(0.05);
     playButton->setPosition(Vec2(screenSize.width / 2 + origin.x, screenSize.height / 2.5 + origin.y));
     this->addChild(playButton);
 
     playButton->addTouchEventListener(CC_CALLBACK_2(MainMenuScene::touchEvent, this));
     playButton->setTag(TAG_MAIN_MENU_PLAY_BUTTON);
+
+    Button *playAIButton = Button::create(MAIN_MENU_PLAY_BUTTON, MAIN_MENU_PLAY_BUTTON_PRESSED);
+    playAIButton->setScaleX(0.1);
+    playAIButton->setScaleY(0.05);
+    playAIButton->setPosition(Vec2(screenSize.width / 2 + origin.x, screenSize.height / 2.5 + origin.y+200));
+    this->addChild(playAIButton);
+
+    playAIButton->addTouchEventListener(CC_CALLBACK_2(MainMenuScene::touchEvent, this));
+    playAIButton->setTag(TAG_MAIN_MENU_PLAY_AI_BUTTON);
+
 
     Button *audioToggleButton = Button::create(SOUND_ON_BUTTON, SOUND_ON_BUTTON_PRESSED);
     audioToggleButton->setScaleX(0.2);
@@ -92,6 +102,18 @@ void MainMenuScene::touchEvent(Ref *sender, Widget::TouchEventType type)
     case Widget::TouchEventType::ENDED:
         // code to handle when the button click has ended (e.g. finger is lifted off the screen)
         if (TAG_MAIN_MENU_PLAY_BUTTON == node->getTag())
+        {
+            Scene *scene = GameScene::createScene();
+            TransitionFade *transition = TransitionFade::create(SCENE_TRANSITION_TIME, scene);
+
+            Director::getInstance()->replaceScene(transition);
+        }
+        // else if (TAG_ACHIEVEMENTS_BUTTON == node->getTag())
+        // {
+        //     SonarCocosHelper::GameCenter::showAchievements();
+        //     SonarCocosHelper::GooglePlayServices::showAchievements();
+        // }
+        else if (TAG_MAIN_MENU_PLAY_AI_BUTTON == node->getTag())
         {
             Scene *scene = GameScene::createScene();
             TransitionFade *transition = TransitionFade::create(SCENE_TRANSITION_TIME, scene);

@@ -60,6 +60,7 @@ list(APPEND GAME_SOURCE
      Classes/SplashScene.cpp
      Classes/MainMenuScene.cpp
      Classes/GameScene.cpp
+     Classes/UI.cpp
      ${PLATFORM_SPECIFIC_SRC}
      )
 list(APPEND GAME_HEADER
@@ -67,6 +68,7 @@ list(APPEND GAME_HEADER
      Classes/SplashScene.h
      Classes/MainMenuScene.h
      Classes/GameScene.h
+     Classes/UI.h
      ${PLATFORM_SPECIFIC_SRC}
      )
 

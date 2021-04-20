@@ -2,6 +2,8 @@
 #define __GAME_SCENE_H__
 
 #include "cocos2d.h"
+#include "UI.h"
+#include "AI.h"
 
 class GameScene : public cocos2d::Scene
 {
@@ -26,11 +28,11 @@ public:
     void removeAll(float dt);
 
     void keyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
-
-    
+    AI *ai;
+    UI *ui;
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
-
+    
 };
 
 #endif // __GAME_SCENE_H__
