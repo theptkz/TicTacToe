@@ -344,7 +344,7 @@ void GameAIScene::reset(int player, bool check)
             label = Label::createWithTTF("X WIN!", "fonts/Roboto.ttf", 50);
         }
     }
-    label->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2));
+    label->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2+100));
     endscene->ShowGameOver(this);
     this->addChild(label);
 

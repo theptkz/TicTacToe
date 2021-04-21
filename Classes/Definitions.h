@@ -11,7 +11,7 @@
 #define AI_PIECE O_PIECE
 
 #define SPLASH_SCENE_BACKGROUND_FILEPATH "res/Splash Background.png"
-#define GAME_OVER_BACKGROUND "res/Pause Background.png"
+#define GAME_OVER_BACKGROUND "res/Main Menu Background.png"
 
 #define MAIN_MENU_TITLE_FILEPATH "res/Game Title.png"
 #define MAIN_MENU_BACKGROUND_FILEPATH "res/Main Menu Background.png"
@@ -19,6 +19,8 @@
 #define MAIN_MENU_PLAY_BUTTON_PRESSED "res/PvP Button.png"
 #define MAIN_MENU_PLAY_AI_BUTTON "res/PvAI Button.png"
 #define MAIN_MENU_PLAY_AI_BUTTON_PRESSED "res/PvAI Button.png"
+#define HOME_BUTTON "res/home.png"
+#define HOME_BUTTON_PRESSED "res/home.png"
 #define GAME_OVER_WINDOW "res/Pause Window.png"
 #define RETRY_BUTTON "res/Retry Button.png"
 #define RETRY_BUTTON_PRESSED "res/Retry Button.png"
@@ -36,4 +38,5 @@
 #define TAG_MAIN_MENU_PLAY_AI_BUTTON 2
 #define TAG_REPLAY_BUTTON 0
 #define TAG_REPLAY_AI_BUTTON 2
+#define TAG_HOME_BUTTON 3
 #define TAG_ACHIEVEMENTS_BUTTON 1

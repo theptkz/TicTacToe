@@ -21,27 +21,29 @@ void EndScene::ShowGameOver( cocos2d::Scene *layer )
 {
     Size screenSize = Director::getInstance( )->getVisibleSize( );
 
-    Sprite *background = Sprite::create( GAME_OVER_BACKGROUND );
-    background->setOpacity( 0 );
-    layer->addChild( background );
-    background->runAction( Sequence::create( DelayTime::create( 1 ), FadeIn::create( GAME_OVER_BACKGROUND_FADE_IN_TIME ), NULL ) );
-    
     MenuItemImage *overlayWindowItem = MenuItemImage::create( GAME_OVER_WINDOW, GAME_OVER_WINDOW, GAME_OVER_WINDOW, NULL );
     Button *retryItem = Button::create( MAIN_MENU_PLAY_BUTTON, MAIN_MENU_PLAY_BUTTON_PRESSED);
     retryItem->setScaleX(0.3);
     retryItem->setScaleY(0.2);
-    retryItem->setPosition( Vec2( overlayWindowItem->getContentSize( ).width / 10-100, retryItem->getPositionY( )-100 ) );
+    retryItem->setPosition( Vec2( overlayWindowItem->getContentSize( ).width / 10-100, retryItem->getPositionY( )-40 ) );
     retryItem->addTouchEventListener(CC_CALLBACK_2(EndScene::touchEvent, this));
     retryItem->setTag(TAG_REPLAY_BUTTON);
     
     Button *retryAIItem = Button::create( MAIN_MENU_PLAY_AI_BUTTON, MAIN_MENU_PLAY_AI_BUTTON_PRESSED);    
     retryAIItem->setScaleX(0.3);
     retryAIItem->setScaleY(0.2);
-    retryAIItem->setPosition( Vec2( overlayWindowItem->getContentSize( ).width / 10+50, retryAIItem->getPositionY( )-100 ) );
+    retryAIItem->setPosition( Vec2( overlayWindowItem->getContentSize( ).width / 10+100, retryAIItem->getPositionY( )-40 ) );
     retryAIItem->addTouchEventListener(CC_CALLBACK_2(EndScene::touchEvent, this));
     retryAIItem->setTag(TAG_REPLAY_AI_BUTTON);
 
-    Menu *menu = Menu::create( overlayWindowItem, retryItem,retryAIItem, NULL );
+    Button *homeButton = Button::create( HOME_BUTTON, HOME_BUTTON_PRESSED);    
+    homeButton->setScaleX(0.4);
+    homeButton->setScaleY(0.3);
+    homeButton->setPosition( Vec2( overlayWindowItem->getContentSize( ).width / 10, homeButton->getPositionY( )-200) );
+    homeButton->addTouchEventListener(CC_CALLBACK_2(EndScene::touchEvent, this));
+    homeButton->setTag(TAG_HOME_BUTTON);
+
+    Menu *menu = Menu::create( overlayWindowItem, retryItem,retryAIItem, homeButton, NULL );
     layer->addChild( menu );
     
 
@@ -87,6 +89,19 @@ void EndScene::touchEvent(Ref *sender, Widget::TouchEventType type)
         //     SonarCocosHelper::GameCenter::showAchievements();
         //     SonarCocosHelper::GooglePlayServices::showAchievements();
         // }
+        if (TAG_HOME_BUTTON == node->getTag())
+        {
+            Scene *scene = MainMenuScene::createScene();
+            TransitionFade *transition = TransitionFade::create(SCENE_TRANSITION_TIME, scene);
+
+            Director::getInstance()->replaceScene(transition);
+        }
+        // else if (TAG_ACHIEVEMENTS_BUTTON == node->getTag())
+        // {
+        //     SonarCocosHelper::GameCenter::showAchievements();
+        //     SonarCocosHelper::GooglePlayServices::showAchievements();
+        // }
+
         break;
 
     case Widget::TouchEventType::CANCELED:
