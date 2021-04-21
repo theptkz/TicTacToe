@@ -2,6 +2,8 @@
 #define __GAME_SCENE_H__
 
 #include "cocos2d.h"
+#include "EndScene.h"
+#include "AI.h"
 
 class GameScene : public cocos2d::Scene
 {
@@ -10,15 +12,15 @@ public:
     cocos2d::Vec2 origin;
     cocos2d::Size visibleSize;
     cocos2d::Sprite *Oturn, *Xturn;
-    static cocos2d::Scene* createScene();
+    static cocos2d::Scene *createScene();
     bool stop;
     virtual bool init();
     void initial();
 
-    bool onTouchBegan(cocos2d::Touch*, cocos2d::Event*);
-    void onTouchEnded(cocos2d::Touch*, cocos2d::Event*);
-    void onTouchMoved(cocos2d::Touch*, cocos2d::Event*);
-    void onTouchCancelled(cocos2d::Touch*, cocos2d::Event*);
+    bool onTouchBegan(cocos2d::Touch *, cocos2d::Event *);
+    void onTouchEnded(cocos2d::Touch *, cocos2d::Event *);
+    void onTouchMoved(cocos2d::Touch *, cocos2d::Event *);
+    void onTouchCancelled(cocos2d::Touch *, cocos2d::Event *);
 
     void checkGameOver(int x, int y, int player);
 
@@ -26,11 +28,10 @@ public:
     void removeAll(float dt);
 
     void keyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
-
-    
+    AI *ai;
+    EndScene *endscene;
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
-
 };
 
 #endif // __GAME_SCENE_H__

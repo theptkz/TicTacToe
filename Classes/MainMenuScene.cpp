@@ -1,5 +1,7 @@
 #include "MainMenuScene.h"
 #include "GameScene.h"
+#include "EndScene.h"
+#include "GameAIScene.h"
 #include "Definitions.h"
 
 #include "extensions/cocos-ext.h"
@@ -49,24 +51,33 @@ bool MainMenuScene::init()
     this->addChild(title);
 
     Button *playButton = Button::create(MAIN_MENU_PLAY_BUTTON, MAIN_MENU_PLAY_BUTTON_PRESSED);
-    playButton->setScaleX(0.205);
-    playButton->setScaleY(0.147);
-    playButton->setPosition(Vec2(screenSize.width / 2 + origin.x, screenSize.height / 2.5 + origin.y));
+    playButton->setScaleX(0.3);
+    playButton->setScaleY(0.3);
+    playButton->setPosition(Vec2(screenSize.width / 2 + origin.x, screenSize.height / 2 + origin.y));
     this->addChild(playButton);
 
     playButton->addTouchEventListener(CC_CALLBACK_2(MainMenuScene::touchEvent, this));
     playButton->setTag(TAG_MAIN_MENU_PLAY_BUTTON);
 
+    Button *playAIButton = Button::create(MAIN_MENU_PLAY_AI_BUTTON, MAIN_MENU_PLAY_AI_BUTTON_PRESSED);
+    playAIButton->setScaleX(0.3);
+    playAIButton->setScaleY(0.3);
+    playAIButton->setPosition(Vec2(screenSize.width / 2 + origin.x, screenSize.height / 2 + origin.y - 200));
+    this->addChild(playAIButton);
+
+    playAIButton->addTouchEventListener(CC_CALLBACK_2(MainMenuScene::touchEvent, this));
+    playAIButton->setTag(TAG_MAIN_MENU_PLAY_AI_BUTTON);
+
     Button *audioToggleButton = Button::create(SOUND_ON_BUTTON, SOUND_ON_BUTTON_PRESSED);
     audioToggleButton->setScaleX(0.2);
     audioToggleButton->setScaleY(0.2);
-    audioToggleButton->setPosition(Vec2(screenSize.width - audioToggleButton->getContentSize().width*0.2 / 2 + origin.x, audioToggleButton->getContentSize().height*0.2 / 2 + origin.y));
+    audioToggleButton->setPosition(Vec2(screenSize.width - audioToggleButton->getContentSize().width * 0.2 / 2 + origin.x, audioToggleButton->getContentSize().height * 0.2 / 2 + origin.y));
     this->addChild(audioToggleButton);
 
     Button *achievementsButton = Button::create(ACHIEVEMENTS_BUTTON, ACHIEVEMENTS_BUTTON_PRESSED);
     achievementsButton->setScaleX(0.185);
     achievementsButton->setScaleY(0.2);
-    achievementsButton->setPosition(Vec2(achievementsButton->getContentSize().width*0.185 / 2 + origin.x, achievementsButton->getContentSize().height*0.211 / 2 + origin.y));
+    achievementsButton->setPosition(Vec2(achievementsButton->getContentSize().width * 0.185 / 2 + origin.x, achievementsButton->getContentSize().height * 0.211 / 2 + origin.y));
     this->addChild(achievementsButton);
 
     // achievementsButton->addTouchEventListener( CC_CALLBACK_2( MainMenuScene::touchEvent, this ) );
@@ -94,6 +105,18 @@ void MainMenuScene::touchEvent(Ref *sender, Widget::TouchEventType type)
         if (TAG_MAIN_MENU_PLAY_BUTTON == node->getTag())
         {
             Scene *scene = GameScene::createScene();
+            TransitionFade *transition = TransitionFade::create(SCENE_TRANSITION_TIME, scene);
+
+            Director::getInstance()->replaceScene(transition);
+        }
+        // else if (TAG_ACHIEVEMENTS_BUTTON == node->getTag())
+        // {
+        //     SonarCocosHelper::GameCenter::showAchievements();
+        //     SonarCocosHelper::GooglePlayServices::showAchievements();
+        // }
+        else if (TAG_MAIN_MENU_PLAY_AI_BUTTON == node->getTag())
+        {
+            Scene *scene = GameAIScene::createScene();
             TransitionFade *transition = TransitionFade::create(SCENE_TRANSITION_TIME, scene);
 
             Director::getInstance()->replaceScene(transition);
