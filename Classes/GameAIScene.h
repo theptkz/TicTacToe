@@ -23,6 +23,8 @@ public:
     void onTouchCancelled(cocos2d::Touch*, cocos2d::Event*);
 
     void checkGameOver(int x, int y, int player);
+    void aiMove(float dt);
+    void delayAiMove();
 
     void reset(int player, bool check);
     void removeAll(float dt);

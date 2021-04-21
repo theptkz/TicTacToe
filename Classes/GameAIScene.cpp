@@ -54,72 +54,100 @@ bool GameAIScene::onTouchBegan(Touch *touch, Event *event)
 {
     LuaLog("Sentuh");
 
-    if (player%2 != 0)
+    // if (player%2 != 0)
+    // {
+    //     int aimove = ai->PlacePiece(post, move);
+    //     int aimoveX = aimove/3;
+    //     int aimoveY = aimove%3;
+    //     if (sisa[1] > 0 && post[aimoveX][aimoveY] == 99 && !stop)
+    //     {
+    //         post[aimoveX][aimoveY] = 1;
+    //         Vec2 areaX = Vec2(origin.x + visibleSize.width / 2 - 100 + aimoveX * 100 - 50,
+    //                             origin.y + visibleSize.height / 2 - 100 + aimoveY * 100 - 50);
+    //         auto sprite = Sprite::create();
+    //         sprite = Sprite::create("res/X.png");
+    //         sprite->setPosition(areaX.x + 50, areaX.y + 50);
+    //         this->addChild(sprite);
+    //         sisa[1]--;
+    //         move++;
+    //         player++;
+    //         Xturn->setOpacity(0);
+    //         Oturn->setOpacity(255);
+    //         checkGameOver(aimoveX, aimoveY, 1);
+    //     }
+    // }
+    //else{
+    for (int i = 0; i < 3; i++)
     {
-        int aimove = ai->PlacePiece(post, move);
-        int aimoveX = aimove/3;
-        int aimoveY = aimove%3;
-        if (sisa[1] > 0 && post[aimoveX][aimoveY] == 99 && !stop)
+        for (int j = 0; j < 3; j++)
         {
-            post[aimoveX][aimoveY] = 1;
-            Vec2 areaX = Vec2(origin.x + visibleSize.width / 2 - 100 + aimoveX * 100 - 50,
-                                origin.y + visibleSize.height / 2 - 100 + aimoveY * 100 - 50);
-            auto sprite = Sprite::create();
-            sprite = Sprite::create("res/X.png");
-            sprite->setPosition(areaX.x + 50, areaX.y + 50);
-            this->addChild(sprite);
-            sisa[1]--;
-            move++;
-            player++;
-            Xturn->setOpacity(0);
-            Oturn->setOpacity(255);
-            checkGameOver(aimoveX, aimoveY, 1);
-        }
-    }
-    else{
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
+            Vec2 areaX = Vec2(origin.x + visibleSize.width / 2 - 100 + i * 100 - 50,
+                            origin.y + visibleSize.height / 2 - 100 + j * 100 - 50);
+            Vec2 areaX2 = Vec2(origin.x + visibleSize.width / 2 - 100 + i * 100 + 50,
+                            origin.y + visibleSize.height / 2 - 100 + j * 100 - 50);
+            Vec2 areaX3 = Vec2(origin.x + visibleSize.width / 2 - 100 + i * 100 - 50,
+                            origin.y + visibleSize.height / 2 - 100 + j * 100 + 50);
+            Vec2 areaX4 = Vec2(origin.x + visibleSize.width / 2 - 100 + i * 100 + 50,
+                            origin.y + visibleSize.height / 2 - 100 + j * 100 + 50);
+            
+            if (touch->getLocation().x < areaX4.x && touch->getLocation().x > areaX.x &&
+                touch->getLocation().y < areaX4.y && touch->getLocation().y > areaX.y)
             {
-                Vec2 areaX = Vec2(origin.x + visibleSize.width / 2 - 100 + i * 100 - 50,
-                                origin.y + visibleSize.height / 2 - 100 + j * 100 - 50);
-                Vec2 areaX2 = Vec2(origin.x + visibleSize.width / 2 - 100 + i * 100 + 50,
-                                origin.y + visibleSize.height / 2 - 100 + j * 100 - 50);
-                Vec2 areaX3 = Vec2(origin.x + visibleSize.width / 2 - 100 + i * 100 - 50,
-                                origin.y + visibleSize.height / 2 - 100 + j * 100 + 50);
-                Vec2 areaX4 = Vec2(origin.x + visibleSize.width / 2 - 100 + i * 100 + 50,
-                                origin.y + visibleSize.height / 2 - 100 + j * 100 + 50);
-                
-                if (touch->getLocation().x < areaX4.x && touch->getLocation().x > areaX.x &&
-                    touch->getLocation().y < areaX4.y && touch->getLocation().y > areaX.y)
+                if (sisa[0] > 0 && post[i][j] == 99 && !stop)
                 {
-                    if (sisa[0] > 0 && post[i][j] == 99 && !stop)
+                    post[i][j] = 0;
+                    auto sprite = Sprite::create();
+                    sprite = Sprite::create("res/O.png");
+                    sprite->setPosition(areaX.x + 50, areaX.y + 50);
+                    this->addChild(sprite);
+                    sisa[0]--;
+                    move++;
+                    if (Oturn->getOpacity() > 0)
                     {
-                        post[i][j] = 0;
-                        auto sprite = Sprite::create();
-                        sprite = Sprite::create("res/O.png");
-                        sprite->setPosition(areaX.x + 50, areaX.y + 50);
-                        this->addChild(sprite);
-                        sisa[0]--;
-                        move++;
-                        player++;
-                        if (Oturn->getOpacity() > 0)
-                        {
-                            Xturn->setOpacity(255);
-                            Oturn->setOpacity(0);
-                        }
-                        else
-                        {
-                            Xturn->setOpacity(0);
-                            Oturn->setOpacity(255);
-                        }
-                        checkGameOver(i, j, 0);
+                        Xturn->setOpacity(255);
+                        Oturn->setOpacity(0);
                     }
+                    else
+                    {
+                        Xturn->setOpacity(0);
+                        Oturn->setOpacity(255);
+                    }
+                    checkGameOver(i, j, 0);
                 }
             }
         }
     }
+    delayAiMove();
+    //}
     return true;
+}
+
+void GameAIScene::aiMove(float dt)
+{
+    int aimove = ai->PlacePiece(post, move);
+    int aimoveX = aimove/3;
+    int aimoveY = aimove%3;
+    if (sisa[1] > 0 && post[aimoveX][aimoveY] == 99 && !stop)
+    {
+        post[aimoveX][aimoveY] = 1;
+        Vec2 areaX = Vec2(origin.x + visibleSize.width / 2 - 100 + aimoveX * 100 - 50,
+                            origin.y + visibleSize.height / 2 - 100 + aimoveY * 100 - 50);
+        auto sprite = Sprite::create();
+        sprite = Sprite::create("res/X.png");
+        sprite->setPosition(areaX.x + 50, areaX.y + 50);
+        this->addChild(sprite);
+        sisa[1]--;
+        move++;
+        Xturn->setOpacity(0);
+        Oturn->setOpacity(255);
+        checkGameOver(aimoveX, aimoveY, 1);
+    }
+}
+
+void GameAIScene::delayAiMove()
+{
+    float delay = 0.2f;
+    this->scheduleOnce(static_cast<cocos2d::SEL_SCHEDULE>(&GameAIScene::aiMove), delay);
 }
 
 void GameAIScene::onTouchEnded(Touch *touch, Event *event)
