@@ -1,3 +1,11 @@
+//
+//  EndScene.hpp
+//  TicTacToePractise
+//
+//  Created by Sonar Systems on 22/03/2016.
+//
+//
+
 #pragma once
 
 #include "cocos2d.h"
@@ -14,6 +22,7 @@ class EndScene
 public:
     EndScene( cocos2d::Scene *layer );
     void ShowGameOver( cocos2d::Scene *layer );
+    int mode;
     
 private:
     void Retry( cocos2d::Ref *pSender );

@@ -1,5 +1,7 @@
 #include "MainMenuScene.h"
 #include "GameScene.h"
+#include "EndScene.h"
+#include "GameAIScene.h"
 #include "Definitions.h"
 
 #include "extensions/cocos-ext.h"
@@ -114,7 +116,7 @@ void MainMenuScene::touchEvent(Ref *sender, Widget::TouchEventType type)
         // }
         else if (TAG_MAIN_MENU_PLAY_AI_BUTTON == node->getTag())
         {
-            Scene *scene = GameScene::createScene();
+            Scene *scene = GameAIScene::createScene();
             TransitionFade *transition = TransitionFade::create(SCENE_TRANSITION_TIME, scene);
 
             Director::getInstance()->replaceScene(transition);

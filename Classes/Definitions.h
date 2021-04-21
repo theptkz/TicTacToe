@@ -4,6 +4,12 @@
 
 #define SPLASH_SCENE_SHOW_TIME 3.0f
 
+#define X_PIECE 2
+#define O_PIECE 1
+
+#define PLAYER_PIECE X_PIECE
+#define AI_PIECE O_PIECE
+
 #define SPLASH_SCENE_BACKGROUND_FILEPATH "res/Splash Background.png"
 #define GAME_OVER_BACKGROUND "res/Pause Background.png"
 
@@ -25,7 +31,9 @@
 
 #define GAME_OVER_BACKGROUND_FADE_IN_TIME 0.5
 
+
 #define TAG_MAIN_MENU_PLAY_BUTTON 0
-#define TAG_MAIN_MENU_PLAY_AI_BUTTON 0
+#define TAG_MAIN_MENU_PLAY_AI_BUTTON 2
 #define TAG_REPLAY_BUTTON 0
+#define TAG_REPLAY_AI_BUTTON 2
 #define TAG_ACHIEVEMENTS_BUTTON 1
