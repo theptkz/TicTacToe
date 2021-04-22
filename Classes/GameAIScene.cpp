@@ -53,30 +53,6 @@ bool GameAIScene::init()
 bool GameAIScene::onTouchBegan(Touch *touch, Event *event)
 {
     LuaLog("Sentuh");
-
-    // if (player%2 != 0)
-    // {
-    //     int aimove = ai->PlacePiece(post, move);
-    //     int aimoveX = aimove/3;
-    //     int aimoveY = aimove%3;
-    //     if (sisa[1] > 0 && post[aimoveX][aimoveY] == 99 && !stop)
-    //     {
-    //         post[aimoveX][aimoveY] = 1;
-    //         Vec2 areaX = Vec2(origin.x + visibleSize.width / 2 - 100 + aimoveX * 100 - 50,
-    //                             origin.y + visibleSize.height / 2 - 100 + aimoveY * 100 - 50);
-    //         auto sprite = Sprite::create();
-    //         sprite = Sprite::create("res/X.png");
-    //         sprite->setPosition(areaX.x + 50, areaX.y + 50);
-    //         this->addChild(sprite);
-    //         sisa[1]--;
-    //         move++;
-    //         player++;
-    //         Xturn->setOpacity(0);
-    //         Oturn->setOpacity(255);
-    //         checkGameOver(aimoveX, aimoveY, 1);
-    //     }
-    // }
-    //else{
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
@@ -113,12 +89,12 @@ bool GameAIScene::onTouchBegan(Touch *touch, Event *event)
                         Oturn->setOpacity(255);
                     }
                     checkGameOver(i, j, 0);
+                    delayAiMove();
                 }
             }
         }
     }
-    delayAiMove();
-    //}
+    // delayAiMove();
     return true;
 }
 
@@ -344,7 +320,7 @@ void GameAIScene::reset(int player, bool check)
             label = Label::createWithTTF("X WIN!", "fonts/Roboto.ttf", 50);
         }
     }
-    label->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2));
+    label->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2+100));
     endscene->ShowGameOver(this);
     this->addChild(label);
 
